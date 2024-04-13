@@ -21,9 +21,11 @@ export default {
       try {
         await axios.post(url, {prompt: this.prompt})
             .then((response) => {
+              console.log(response.data.similarity)
               similarity =  response.data
               similarity = similarity['similarity']
-              return "hello"
+              console.log(similarity)
+              return similarity
             });
 
       } catch (error) {
@@ -31,22 +33,12 @@ export default {
       }
     },
 
-    /**
-     * fetch(){
-     *       axios.post(url, {prompt: this.prompt})
-     *           .then((response) => {
-     *             similarity =  response.data
-     *             similarity = similarity['similarity']
-     *             console.log(similarity)
-     *
-     *       });
-     */
-
     sendPrompt() {
 
       similarity = this.fetch()
 
-      console.log(this.fetch)
+     // console.log(this.fetch)
+     console.log(this.prompts)
 
       const word = new Word()
       word.value = this.prompt
@@ -60,6 +52,8 @@ export default {
       }
       this.prompt = ''
     }
+
+    //si similarity = 100 alors "WIN"
   },
 
   computed: {
@@ -73,7 +67,7 @@ export default {
 <template>
 
   <p>{{ message}}</p>
-  <form @submit.prevent="sendPrompt">
+  <form @submit.prevent="sendPrompt(prompt)">
     <input v-model="prompt" type="text" name="" id="" placeholder="un mot">
     <button type="submit" class="btn btn-warning">OK</button>
   </form>
