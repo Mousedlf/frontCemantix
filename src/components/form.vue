@@ -43,12 +43,7 @@ export default {
       }
     }
 
-  },
-
-  computed: {
-    // futur filtre pour ordre
   }
-
 }
 
 </script>
